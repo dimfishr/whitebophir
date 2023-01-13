@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: ".env",
+});
+
 var app = require("http").createServer(handler),
   sockets = require("./sockets.js"),
   {log, monitorFunction} = require("./log.js"),

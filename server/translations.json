@@ -429,7 +429,8 @@
     "tools": "Инструменты",
     "view_source": "Исходный код на GitHub",
     "white-out": "Корректор",
-    "zoom": "Лупа"
+    "zoom": "Лупа",
+    "clear": "Очистить"
   },
   "sw": {
     "board_name_placeholder": "Jina la ubao mweupe ...",

@@ -514,10 +514,11 @@
 			"icon": "tools/hand/selector.svg",
 			"active": false,
 			"switch": switchTool,
+			"mouseCursor": "default",
 		},
 		"draw": draw,
 		"icon": "tools/hand/hand.svg",
-		"mouseCursor": "move",
+		"mouseCursor": "pointer",
 		"showMarker": true,
 	};
 	Tools.add(handTool);

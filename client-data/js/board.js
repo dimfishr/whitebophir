@@ -261,6 +261,9 @@ Tools.add = function (newTool) {
 		Tools.HTML.addStylesheet(newTool.stylesheet);
 	}
 
+    if (newTool.moderator && document.getElementById("moderator").text !== 'true') {
+		return;
+	}
 	//Add the tool to the GUI
 	Tools.HTML.addTool(newTool.name, newTool.icon, newTool.iconHTML, newTool.shortcut, newTool.oneTouch);
 };
@@ -275,6 +278,8 @@ Tools.change = function (toolName) {
 			var props = newTool.secondary.active ? newTool.secondary : newTool;
 			Tools.HTML.toggle(newTool.name, props.name, props.icon);
 			if (newTool.secondary.switch) newTool.secondary.switch();
+			Tools.svg.style.cursor = (newTool.secondary.active && newTool.secondary.mouseCursor) ?
+				newTool.secondary.mouseCursor : newTool.mouseCursor;
 		}
 		return;
 	}

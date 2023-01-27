@@ -47,6 +47,7 @@
         "oneTouch": true,
         "onstart": clearBoard,
         "draw": draw,
+        "moderator": true,
         "mouseCursor": "crosshair",
     });
 

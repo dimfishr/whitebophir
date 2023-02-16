@@ -32,6 +32,8 @@ module.exports = {
   /** Maximum value for any x or y on the board */
   MAX_BOARD_SIZE: parseInt(process.env["WBO_MAX_BOARD_SIZE"]) || 65536,
 
+  MAX_BOARD_SIZE_Y: ((parseInt(process.env["WBO_MAX_BOARD_SIZE"]) || 65536) / 16 * 9),
+
   /** Maximum messages per user over the given time period before banning them  */
   MAX_EMIT_COUNT: parseInt(process.env["WBO_MAX_EMIT_COUNT"]) || 192,
 

@@ -2,6 +2,7 @@ html, body, svg {
 	padding:0;
 	margin:0;
 	font-family: Liberation sans, sans-serif;
+	overflow: hidden;
 }
 
 #canvas {

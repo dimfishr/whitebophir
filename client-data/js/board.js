@@ -470,12 +470,11 @@ function updateDocumentTitle() {
 function resizeCanvas(m) {
 	//Enlarge the canvas whenever something is drawn near its border
 	var x = m.x | 0, y = m.y | 0
-	var MAX_BOARD_SIZE = Tools.server_config.MAX_BOARD_SIZE || 65536; // Maximum value for any x or y on the board
 	if (x > Tools.svg.width.baseVal.value - 2000) {
-		Tools.svg.width.baseVal.value = Math.min(x + 2000, MAX_BOARD_SIZE);
+		Tools.svg.width.baseVal.value = Math.min(x + 2000, Tools.server_config.MAX_BOARD_SIZE);
 	}
 	if (y > Tools.svg.height.baseVal.value - 2000) {
-		Tools.svg.height.baseVal.value = Math.min(y + 2000, MAX_BOARD_SIZE);
+		Tools.svg.height.baseVal.value = Math.min(y + 2000, Tools.server_config.MAX_BOARD_SIZE_Y);
 	}
 }
 
@@ -491,8 +490,8 @@ Tools.messageHooks = [resizeCanvas, updateUnreadCount];
 Tools.scale = 1.0;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
-	var fullScale = Math.max(window.innerWidth, window.innerHeight) / Tools.server_config.MAX_BOARD_SIZE;
-	var minScale = Math.max(0.1, fullScale);
+	var fullScale = Math.max(document.documentElement.clientWidth/Tools.server_config.MAX_BOARD_SIZE, document.documentElement.clientHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
+	var minScale = 0.5;
 	var maxScale = 10;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));

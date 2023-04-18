@@ -153,8 +153,8 @@ html, body, svg {
 }
 
 #menu .tool.curTool {
-  box-shadow: 0 0 5px #0074D9;
-  background: linear-gradient(#96E1FF, #36A2FF);
+  box-shadow: 0 0 5px #00B5FF;
+  background: #00B5FF;
 }
 
 #menu .tool-icon {

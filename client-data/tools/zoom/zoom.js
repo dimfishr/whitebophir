@@ -31,6 +31,7 @@
         scrollY: document.documentElement.scrollTop,
         x: 0.0,
         y: 0.0,
+        clientX: 0,
         clientY: 0,
         scale: 1.0
     };
@@ -59,6 +60,7 @@
         origin.x = x;
         origin.y = y;
         origin.clientY = getClientY(evt, isTouchEvent);
+        origin.clientX = getClientX(evt, isTouchEvent);
         origin.scale = Tools.getScale();
     }
 
@@ -151,6 +153,10 @@
                 Tools.svg.style.cursor = "zoom-" + (down ? "out" : "in");
             }
         }
+    }
+
+    function getClientX(evt, isTouchEvent) {
+        return isTouchEvent ? evt.changedTouches[0].clientX : evt.clientX;
     }
 
     function getClientY(evt, isTouchEvent) {

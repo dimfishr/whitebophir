@@ -110,8 +110,8 @@
 	}
 
 	function duplicateSelection() {
-		if (!(selectorState == selectorStates.pointing)
-			|| (selected_els.length == 0)) return;
+		if (!(selectorState === selectorStates.pointing)
+			|| (selected_els.length === 0)) return;
 		var msgs = [];
 		var newids = [];
 		for (var i = 0; i < selected_els.length; i++) {

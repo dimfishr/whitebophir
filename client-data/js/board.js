@@ -336,7 +336,7 @@ Tools.removeToolListeners = function removeToolListeners(tool) {
 (function () {
 	// Handle secondary tool switch with shift (key code 16)
 	function handleShift(active, evt) {
-		if (evt.keyCode === 16 && Tools.curTool.secondary && Tools.curTool.secondary.active !== active) {
+		if (evt.keyCode === 16 && Tools.curTool?.secondary && Tools.curTool.secondary.active !== active) {
 			Tools.change(Tools.curTool.name);
 		}
 	}
@@ -490,8 +490,8 @@ Tools.messageHooks = [resizeCanvas, updateUnreadCount];
 Tools.scale = 1.0;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
-	var fullScale = Math.max(document.documentElement.clientWidth/Tools.server_config.MAX_BOARD_SIZE, document.documentElement.clientHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
-	var minScale = 0.5;
+	var fullScale = Math.max(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
+	var minScale = Math.max(0.1, fullScale);
 	var maxScale = 10;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));

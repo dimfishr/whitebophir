@@ -6,6 +6,7 @@ html, body, svg {
 
 #canvas {
 	transform-origin: 0 0;
+	border: 1px solid #cccccc;
 }
 
 #loadingMessage {

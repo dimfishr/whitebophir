@@ -468,6 +468,7 @@ function updateDocumentTitle() {
 })();
 
 function resizeCanvas(m) {
+	return;
 	//Enlarge the canvas whenever something is drawn near its border
 	var x = m.x | 0, y = m.y | 0
 	if (x > Tools.svg.width.baseVal.value - 2000) {
@@ -490,16 +491,19 @@ Tools.messageHooks = [resizeCanvas, updateUnreadCount];
 Tools.scale = 1.0;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
-	var fullScale = Math.max(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
-	var minScale = Math.max(0.25, fullScale);
-	var maxScale = 10;
+	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
+	var minScale = Math.max(0.1, fullScale);
+	var maxScale = 12;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
-	Tools.svg.style.willChange = 'transform';
-	Tools.svg.style.transform = 'scale(' + scale + ')';
+	Tools.board.style.willChange = 'transform';
+	Tools.board.style.transform = 'scale(' + scale + ')';
+	Tools.board.style.transformOrigin = '0 0';
+	Tools.board.style.width = Math.round(Tools.server_config.MAX_BOARD_SIZE * scale).toString() + "px";
+	Tools.board.style.height = Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * scale).toString() + "px";
 	clearTimeout(scaleTimeout);
 	scaleTimeout = setTimeout(function () {
-		Tools.svg.style.willChange = 'auto';
+		Tools.board.style.willChange = 'auto';
 	}, 1000);
 	Tools.scale = scale;
 	return scale;
@@ -679,8 +683,10 @@ Tools.getOpacity = (function opacity() {
 
 
 //Scale the canvas on load
-Tools.svg.width.baseVal.value = document.body.clientWidth;
-Tools.svg.height.baseVal.value = document.body.clientHeight;
+//Tools.board.width.baseVal.value = Tools.server_config.MAX_BOARD_SIZE;
+Tools.board.style.height= Tools.server_config.MAX_BOARD_SIZE_Y;
+Tools.svg.width.baseVal.value = Tools.server_config.MAX_BOARD_SIZE;
+Tools.svg.height.baseVal.value = Tools.server_config.MAX_BOARD_SIZE_Y;
 
 /**
  What does a "tool" object look like?

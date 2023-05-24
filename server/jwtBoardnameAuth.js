@@ -62,6 +62,12 @@ function roleInBoard(token, board = null) {
         }
         var payload = jsonwebtoken.verify(token, config.AUTH_SECRET_KEY);
 
+        if (payload.role === 1) {
+            return "moderator";
+        } else if (payload.role === 0){
+            return "editor";
+        }
+
         var roles = payload.roles;
         var oneHasBoardName = false;
         var oneHasModerator = false;

@@ -38,6 +38,9 @@ Tools.i18n = (function i18n() {
 
 Tools.server_config = JSON.parse(document.getElementById("configuration").text);
 
+var BOARD_X_BASE = Tools.server_config.BOARD_X_BASE;
+var BOARD_Y_BASE = Tools.server_config.BOARD_Y_BASE;
+
 Tools.board = document.getElementById("board");
 Tools.svg = document.getElementById("canvas");
 Tools.drawingArea = Tools.svg.getElementById("drawingArea");
@@ -536,8 +539,8 @@ Tools.toolHooks = [
 
 		function compile(listener) { //closure
 			return (function listen(evt) {
-				var x = evt.pageX / Tools.getScale(),
-					y = evt.pageY / Tools.getScale();
+				var x = evt.pageX / Tools.getScale() - BOARD_X_BASE,
+					y = evt.pageY / Tools.getScale() - BOARD_Y_BASE;
 				return listener(x, y, evt, false);
 			});
 		}

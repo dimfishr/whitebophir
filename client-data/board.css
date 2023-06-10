@@ -1,12 +1,16 @@
-html, body, svg {
+html, body {
 	padding:0;
 	margin:0;
+	background-color: #cccccc;
 	font-family: Liberation sans, sans-serif;
 }
 
-#canvas {
+#canvas, svg {
 	transform-origin: 0 0;
+	background-color: #ffffff;
 	border: 1px solid #cccccc;
+	margin: 500px;
+	font-family: Liberation sans, sans-serif;
 }
 
 #loadingMessage {

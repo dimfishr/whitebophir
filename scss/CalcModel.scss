@@ -1,0 +1,779 @@
+@import "mixin";
+@import "variables";
+
+$RCTextColor: #1E1F25;
+.calcModel {
+	// height: 100%;
+	// width: 100%;
+	display: flex;
+	flex-direction: column;
+    justify-content:flex-start;
+    flex-grow: 1;
+    min-height: 0;
+    //justify-content: space-between;
+
+    &__Box {
+        // background-color: $lw_table_even_color; //light light grey!!
+    }
+
+    &__BoxWhite {
+        // background-color: white;
+        // margin-left: 0.09em;
+        //border: solid 2px orange;
+    }
+
+    &__flexColumn {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-items: flex-start;
+        align-items: center;
+        background-color: white;
+        min-width: 0;  //mandatory when use flex-grow: 1;
+        min-height: 0; //mandatory when use flex-grow: 1;
+
+        &RightCol {
+            align-items: flex-start;
+        }
+        
+        &Coil {
+            align-items: normal;
+        }
+
+        &CoilRange {
+            align-items: normal;
+            // height: 80%;
+            flex-grow: 1;
+            min-height: 0;
+            margin-bottom: 1.25em;
+        }
+
+        &Graphs {
+            justify-items: center; 
+            width: calc(50% - 2.5em);
+
+            svg {
+                max-width: 100%;
+            }
+        }
+        &ElDynam {
+            margin-right: 1.4em;
+        }
+    }
+
+    &__stretch {
+        display: flex;
+        justify-content: space-between;
+        align-items: top; 
+        font-size: 1.125em;
+		// width: 100%;
+        gap: 2.5em;
+    }
+
+    &__stretch_ScaleSvg {
+        margin: 0 0 1em;
+        display: flex;
+        // justify-content:flex-start;
+        // align-items: top; 
+        flex-grow: 1;
+        min-height: 0;
+        min-width: 0;
+
+        .calcModel__coil {
+            height: inherit;
+            min-width: 0;
+            flex-grow: 1;
+            width: auto;
+
+            svg {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    } 
+
+    &__topTitleBox {
+        font-size: 0.7em;
+        width: 100%;
+        margin-bottom: 1em;
+
+        &Dot {
+            font-size: 1.6em;
+            position: relative;
+            top: -4px;
+        }
+    }
+
+    &__stretchTop {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.125em;
+		width: 100%;
+    }
+
+    &__head {
+        font-size: 1.2em;
+        font-weight: 800;
+        padding: 1.4em  1.4em 0.5em;
+    }
+
+    &__experimentNumber {
+        font-size: 0.8em;
+        margin-bottom: 0.2em;
+    }
+
+    &__centerTitle {
+        text-align: center;
+        font-size: 0.9em;
+        font-weight: 800;
+		width: 100%;
+        padding-bottom: 1em;
+    }    
+
+    &__rightTitle {
+        text-align: right;
+        font-size: 0.9em;
+        font-weight: 800;
+        padding-right: 12%;
+        padding-bottom: 0.5em;
+    }    
+
+    &__topEmptyBox {
+        width: 15%;
+    }
+
+    &__title {
+        font-size: 1em;
+        font-weight: 800;
+        padding: 1em 0.5em 1em 0.5em;
+        width: 15em;
+
+        &ExpModeTitle {
+            padding-left: 1em;
+            width: 100%;
+        }
+    }
+
+    &__titleBtn {
+        font-size: 1em;
+        max-height: 2em;
+        width: 20em;
+        text-align: left;
+        padding: 0.5em 0.3em;
+        margin: 0.3em 0.5em;
+    }
+
+    &__label {
+        font-size: 1em;
+        color: #7C8195;
+        margin-bottom: 0.8125em;
+
+        b {
+            color: #1E1F25;
+            font-weight: 500;
+        }
+    }
+
+    &__range {
+        //width: 100%;
+        // display: flex;
+        // gap: 2.5em;
+        font-size: 0.85em;
+        // flex-direction: column;
+        // justify-content:flex-start;
+        //border: solid 3px orange;        
+
+        &Cmf {
+            margin-bottom: 1.375em;
+        }
+
+        &Col {
+            width: calc(50% - 1.1em);
+        }
+    }
+
+    &__interfChkBoxes {
+        font-size: 0.7em;
+    }
+
+    &__centerBox {
+        margin: auto;
+        width: 90%;
+    }
+
+    &__initPage {
+        // padding: 0.5em;
+        // font-size: 0.9em;
+
+        &Title {
+            // padding: 0.3em 0;
+        }
+        &Image {
+            // height: 14em;
+        }
+        &Elemain {width: 38%;}
+        &ElemInterm {width: 8%;}
+    }
+
+    &__SelectMaterial {
+		color: $RCTextColor;
+		background-color: $lw_table_listbox_bknd_color;
+		border: solid 1px gray;
+		font-size: 0.9em;
+		border-radius: 2px;
+	}
+
+    &__SelectElDynam {
+		color: $RCTextColor;
+		background-color: white;
+		border: solid 1px $lw_blue_color;
+		font-size: 0.7em;
+		border-radius: 2px;
+        line-height: 0.9em;
+        margin: 0.1em 0;
+        width: 15em;
+
+        &Exp {
+            margin-top: 0.2em;
+        }
+        &ExpSize {
+            width: 12em;
+        }
+	}
+
+    &__rainbowStripe {
+        //background: linear-gradient(90deg, red, orange, yellow, green, lightblue, blue, violet);
+        background: linear-gradient(90deg, rgba(255, 0, 0, 0.5), rgba(255, 165, 0, 0.5), rgba(255, 255, 0, 0.5), 
+        rgba(0, 128, 0, 0.5), rgba(173, 216, 230, 0.5), rgba(0, 0, 255, 0.5), rgba(238, 130, 238, 0.5));
+        margin-bottom: 0.4em;
+        text-align: center;
+    }
+
+    &__rainbowStripeUp {
+        //background: linear-gradient(90deg, red, orange, yellow, green, lightblue, blue, violet);
+        background: linear-gradient(90deg, 
+        rgba(238, 130, 238, 0.5),
+        rgba(0, 0, 255, 0.5), 
+        rgba(173, 216, 230, 0.5), 
+        rgba(0, 128, 0, 0.5),
+        rgba(255, 255, 0, 0.5), 
+        rgba(255, 165, 0, 0.5), 
+        rgba(255, 0, 0, 0.5), 
+        );
+        margin-bottom: 0.4em;
+        text-align: center;
+    }
+
+    &__rainbowRanges {
+        font-size: 0.8em;
+        font-weight: 800;
+        padding: 0.2em 0.8em;
+    }
+
+    &__name {
+        width: 100%;
+
+        &Font {
+            font-size: 0.9em;
+        }
+
+        &Coord {
+            margin: 0.5em 0;
+        }
+
+        &ElDynamChain {
+            font-size: 0.7em;
+            padding: 1em 0.5em 1em 0;
+            width: 13em;
+        }
+    }
+    
+
+    &__inputRange {
+        width: 100%;
+
+        &Refraction {
+            width: 100%;
+        }
+    }
+
+    &__inputRangeVert { ///it should depend on height of svg -set by style!!
+        margin-right: 1.0625em;
+        display: flex;
+        min-height: 0;
+        flex: none;
+    }
+
+    &__inputRangeBottom {
+        margin-left: 2.2em;
+        //max-width: 100%; //Evgeniy changes - distort bottom horiz scroll
+    }
+
+    &__input {
+        width: 4em;
+    }
+    &__inputLong {
+        width: 7em;
+        position: relative;
+        top: -0.6em;
+    }
+
+    &__inputBox {
+        margin: 0.2em 0 0.2em 1em;
+        position: relative;
+        top: -0.4em;
+    }
+
+    &__valueBox {
+        padding-left: 1em;
+        width: 20%
+    }
+
+    &__initParams {
+        width: 16em;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8em;
+        align-items: center; 
+    }
+    &__initParamName {
+        width: 17em;
+        height: 3em;
+
+    }
+    &__initParamValue {
+        width: 5em;
+        position: relative;
+        top: -0.9em;
+        font-weight: 800;
+    }
+    &__initParamUnits {
+        width: 5em;
+    }
+    &__initParamRange {
+        font-size: 0.7em;
+    }
+
+    &__leftCol {
+        width: 27%;
+        margin-right: 0.2em;
+    }
+
+    &__middleCol {
+        width: 24%;
+        margin-right: 0.2em;
+    } 
+
+    &__rightCol {
+        width: 45%;
+    }
+
+    &__ColTitle {
+        font-size: 0.8em;
+    }
+
+    &__leftColBtn {
+        width: 16em;
+        //height: 2em;
+        margin: 0.1em 0;
+    }
+
+    &__middleColBtn {
+        //width: 16em;
+        margin: 1em 0;
+    }
+
+    &__bottomComment {
+        width: 90%;
+        margin: 1em;
+        font-size: 0.9em;
+    }
+
+    &__coil {
+        //border: solid 2px red;
+        height: 3.4375em; 
+        min-width: 100%; ////
+        width: 100%;
+        
+        &Lense {
+            text-align: center;
+        }
+
+        // &svg { 
+        //     max-width: 100%; //added by Evgeniy
+        // }
+    }
+
+    &__graph {
+        margin-bottom: 0.5em;
+        
+        &Values {
+            font-size: 0.7em;
+            margin-bottom: 0.6em;
+        }
+    }
+
+    &__result {
+        font-size: 1em;
+        font-weight: 800;
+    }
+
+    &__img {
+        font-size: 1em;
+        font-weight: 800;
+        position: relative;
+        top: 1em;
+    }
+
+    &__space {
+        padding-bottom: 1em;
+    }
+
+	&__button {
+		font-size: 0.9em;
+		border: none;
+		padding: 0.2em 1em;
+        margin: 0.2em 1em;
+        border-radius: 0.3125em;
+
+        &ShortPad {
+            padding: 0.2em 0.6em;
+        }
+
+		&:hover {
+			cursor: pointer;
+		}
+
+        &Unsel {
+            background-color: white;
+            color: $lw_blue_color;
+            border: solid 1px  $lw_blue_color;
+        }
+        &Sel {
+            background-color: $lw_blue_color;
+            color: white;
+        }
+        &Disabled {
+            color: lightgrey;
+        }
+        &BtnSize {
+            width: 15em;
+        }
+    }
+
+    &__images {
+		height: 12.8em;
+		border: solid 1px grey;
+        text-align: center;
+	}
+
+    &__rightTabs {
+        float: left;
+        //width: 40%;
+        margin: 1em 0;
+        height: 15em;
+    }
+
+    &__svgLegend {
+        font-size: 0.6em;
+    }
+    &__svgLenseLegend {
+        font-size: 1.2em;
+        background: transparent;
+    }
+    &__svgScale {
+        font-size: 0.5em;
+    }
+    &__svgBoxText {
+        font-size: 0.6em;
+    }
+
+    &__bottomButtons {
+        // margin-left: 3em;
+        padding-bottom: 1.25em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .btn {
+            width: 100%;
+        }
+
+        > div {
+            &:first-child, &:last-child {
+                width: 20em;
+            }
+        }
+    }
+
+    &__elDynamBottomSection {
+        background-color: white;
+        position: relative;
+        left: 1.4em;
+        padding: 0.1em 1.4em 0.5em 1.4em;
+    }
+
+    &__battery {
+        //width: 10px;
+        height: 1em;
+        padding: 0 2px;
+        position: relative;
+        top: 1px;
+    }
+
+    &__experienceImage {
+        height: 10em;
+        padding: 1em;
+        //position: relative;
+        //top: 1px;
+    }
+
+    &__cursorPos {
+        margin: 0.7em;
+        font-size: 0.8em;
+
+        &Space {
+            padding: 0 1.5em;
+        }
+    }
+    &__leftBottomBtn {
+        padding-right: 1em;
+    }
+    &__elDynamBtn {
+        padding: 0 0.3em;
+        margin: 0.1em 0.2em;
+        font-size: 0.8em;
+    }
+    &__elDynamInfo {
+        padding: 0.0em 0 0.7em 0;
+        font-size: 0.8em;
+    }
+
+    &__btnIcon {
+        height: 1em;
+    }
+
+    &__circle {
+        background: lightblue;
+        border-radius: 50%;
+        margin-right: 1em;
+        font-size: 0.6em;
+
+        &Text {
+            font-size: 0.8em;
+        }
+
+    }
+
+    &_Row {
+		height: 100%;
+		width: 100%;
+		display: flex;
+        color: black;
+        padding: 0.1em 0.4em 0.6em 0;
+        line-height: 1.3em;
+        
+        &Col {
+            padding-bottom: 0.3em;
+        }
+        &Col1 {
+            width: 45%;
+        }
+        &Col2 {
+            width: 50%;
+            font-weight: 800;
+        }
+    }
+
+    &__Virtual {
+        //border: solid 1px green;
+    }
+
+    &__eDynam {
+        //border: solid 1px red;
+
+        &ColumnOpts {
+            width: 55%;
+        }
+        &ColumnBtns {
+            width: 25%;
+        }
+        &ColumnGraph {
+            //width: 20%;
+            float: right;
+        }
+
+        &InputRange {
+            width: 100%;
+        }
+
+        &OscParams {
+            width: 30%;
+        }
+        &OscGraphs {
+            width: 70%;
+        }
+
+
+        &RangeMargin {
+            width: 49%;
+            margin-bottom: 0.5em;
+        }
+
+        &ChainBox {
+            border: solid 1px grey;
+            font-size: 0.8em;
+            height: 100%;
+            line-height: 1.1em;
+            padding: 1.2em 0.5em;
+            text-align: center;
+            //margin: 0.2em 0;
+        }
+    }
+    
+    &__brd {
+        //border: solid 1px red;
+    }
+    &__brd2 {
+        //border: solid 1px greenyellow;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .docIcon {
+        padding-right: 3px;
+    }
+}
+
+// V 2
+.calcModel__initPage {
+    &List {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25em;
+        padding-bottom: 0.9em;
+    }
+
+    &Elem {
+        border: 1px solid #E8E8E8;
+        // flex: 1 0 19.375em;
+        width: calc(33.3% - 0.6em);
+        border-radius: 0.375em;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.6em;
+        // cursor: pointer;
+
+        @media (min-width: 1921px) {
+            width: 22em;
+        }
+    }
+
+    &Image {
+        width: 100%;
+        height: 6.0625em;
+        cursor: pointer;
+
+        img {
+            display: block;
+            object-fit: cover;
+            object-position: center top;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &Bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.625em;
+        padding: 1.0625em 0.9375em;
+        border-top: 1px solid #E8E8E8;
+        flex-grow: 1;
+        min-height: 0;
+    }
+
+    &Title {
+        font-size: 0.875em;
+    }
+
+    &Link {
+        font-size: 1em;
+        flex: none;
+        width: 1.5em;
+        height: 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #00B5FF;
+        border: 0;
+        border-radius: 0.375em;
+        transition: background 0.4s;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($color: #00B5FF, $amount: 3%);
+        }
+
+        &:after {
+          content: '';
+          border: 0.2em solid transparent;
+          border-left: 0.3em solid #fff;
+          margin-right: -0.3em;
+
+        }
+    }
+}
+
+.calcModel__modal {
+    &Labels {
+        display: flex;
+        gap: 1.25em;
+        margin-bottom: 1.875em;
+
+        &__item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        &_circle {
+            flex: none;
+            width: 0.7em;
+            height: 0.7em;
+            border-radius: 50%;
+            margin-right: 0.4em;
+
+            &BRV {
+                background: #9647FB;
+            }
+            &BRH {
+                background: #F75656;
+            }
+            &BZV {
+                background: #FFAD32;
+            }
+            &BZH {
+                background: #00DA98;
+            }
+        }
+    }
+    .modal__action {
+        // align-items: flex-start;
+        .btn {
+            width: 27em;
+        }
+    }
+}
+
+.calcModel__graph {
+    &Title {
+        text-align: left;
+        align-self: flex-start;
+        font-size: 1em;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+    }
+}

@@ -1,0 +1,200 @@
+/* Global variables */
+/* ======================================================================== */
+/* Grid */
+/* ======================================================================== */
+/* Form */
+/* ======================================================================== */
+.firmware__info.open {
+  overflow-y: auto; }
+  @media (min-width: 768px) {
+    .firmware__info.open {
+      overflow-y: overlay; }
+      .firmware__info.open::-webkit-scrollbar {
+        flex: none;
+        width: 1.25em;
+        height: 1.25em; }
+        .firmware__info.open::-webkit-scrollbar-button {
+          display: none; }
+          .firmware__info.open::-webkit-scrollbar-button:single-button {
+            width: 0;
+            height: 0; }
+        .firmware__info.open::-webkit-scrollbar-thumb {
+          background: #BEC9D3;
+          border-radius: 1.25em;
+          border: 0.5em solid transparent;
+          background-clip: content-box;
+          min-height: 3em; }
+          .dark .firmware__info.open::-webkit-scrollbar-thumb {
+            border: 0.5em solid transparent;
+            background: #464F57;
+            background-clip: content-box; } }
+
+.firmware .modal__message span {
+  color: #00b5ff; }
+
+.firmware__alert {
+  background: rgba(0, 181, 255, 0.3);
+  border-radius: 0.375em;
+  padding: 0.7em 1.25em;
+  margin-bottom: 0.625em;
+  position: relative;
+  overflow: hidden;
+  display: inline-block; }
+  .firmware__alert:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0.4375em;
+    background: #00b5ff; }
+  .firmware__alert span {
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1.2; }
+  .firmware__alert i {
+    color: #00b5ff;
+    font-style: normal; }
+
+.firmware__swicher {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 1em 0; }
+  .firmware__swicher > span {
+    font-size: 0.75em;
+    font-weight: 600; }
+
+.firmware__old {
+  margin: 0.1em 0;
+  font-size: 0.75em;
+  font-weight: 500; }
+  .dark .firmware__old {
+    color: #fff; }
+
+.firmware__upload span {
+  color: #00b5ff;
+  font-size: 0.75em;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer; }
+  .firmware__upload span:hover {
+    text-decoration: none; }
+
+.firmware__upload input {
+  display: none; }
+
+.firmware__device {
+  flex-grow: 1;
+  min-width: 0;
+  font-size: 0.9em; }
+
+.firmware__version .dropdown__label {
+  font-weight: 600; }
+  .dark .firmware__version .dropdown__label {
+    background: #363a45;
+    border: 1px solid #4a4f5b; }
+
+.firmware__term {
+  margin: 1em 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.firmware__label {
+  font-size: 0.875em; }
+
+.firmware__progress {
+  width: 100%; }
+  .firmware__progressTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3em; }
+    .firmware__progressTop span {
+      position: relative;
+      font-size: 0.75em;
+      transform: translateX(-50%);
+      transition: left 0.1s; }
+      .dark .firmware__progressTop span {
+        color: #fff; }
+  .firmware__progressBottom {
+    text-align: right;
+    margin-top: 0.3em; }
+    .firmware__progressBottom span {
+      font-size: 0.75em;
+      font-style: normal; }
+      .dark .firmware__progressBottom span {
+        color: rgba(255, 255, 255, 0.7); }
+  .firmware__progress progress {
+    margin: 0;
+    display: block;
+    width: 100%;
+    height: 0.3125em;
+    appearance: none; }
+    .firmware__progress progress::-webkit-progress-bar {
+      background: rgba(0, 181, 255, 0.4);
+      border-radius: 0.75em; }
+    .firmware__progress progress::-webkit-progress-value {
+      background: #00b5ff;
+      border-radius: 0.75em;
+      transition: width 0.1s; }
+
+.firmware__toggle {
+  font-size: 0.75em;
+  cursor: pointer; }
+  .firmware__toggle i {
+    transition: transform 0.3s; }
+    .firmware__toggle i.inverse {
+      display: block;
+      transform: rotate(180deg); }
+
+.firmware__info {
+  padding: 0 0.875em;
+  border-radius: 0;
+  border: 0;
+  height: 0;
+  width: 100%;
+  font-size: 0.875em;
+  line-height: 1.4;
+  transition: height 0.3s;
+  overflow: hidden;
+  resize: none; }
+  .firmware__info.open {
+    border: 1px solid #bec9d3;
+    border-radius: 0.1875em;
+    margin-bottom: 1em;
+    background: #f5f8fa;
+    height: 18.75em;
+    padding: 0.875em; }
+    .dark .firmware__info.open {
+      background: #363a45;
+      border: 1px solid #4a4f5b; }
+
+.firmware__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+
+.firmware__preload b, .firmware__success b, .firmware__load b {
+  font-size: 0.875em;
+  line-height: 1.5; }
+
+.dark .firmware__preload, .dark .firmware__success, .dark .firmware__load {
+  color: #fff; }
+
+.firmware__rez h3 {
+  font-size: 1.3em; }
+
+.firmware__rez p {
+  font-size: 0.875em; }
+
+@media (min-width: 768px) {
+  .firmware .modal__action .btn {
+    max-width: 50%; } }

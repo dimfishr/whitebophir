@@ -14,13 +14,15 @@
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
     "polyfill-library": "^3.107.1",
+    "scss": "^0.2.4",
     "serve-static": "^1.14.1",
     "socket.io": "^4",
     "statsd-client": "^0.4.7"
   },
   "scripts": {
     "start": "node ./server/server.js",
-    "test": "nightwatch tests && nightwatch tests --env jwt"
+    "test": "nightwatch tests && nightwatch tests --env jwt",
+    "build-sass": "scss/style.scss --output client-data/ui.css --output-style compressed"
   },
   "main": "./server/server.js",
   "repository": {
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "geckodriver": "^3.0.1",
-    "nightwatch": "^1.7.12"
+    "nightwatch": "^1.7.12",
+    "node-sass": "^9.0.0"
   }
 }

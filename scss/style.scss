@@ -1,0 +1,253 @@
+/*!
+ *
+ * Evgeniy Ivanov - 2018
+ * busforward@gmail.com
+ * Skype: ivanov_ea
+ *
+ */
+@import 'mixin'; // Fonts
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,900);
+@include font-face('Inter', '../../assets/fonts/Inter-Regular', 400, normal, ttf);
+@include font-face('Inter', '../../assets/fonts/Inter-Medium', 500, normal, ttf);
+@include font-face('Inter', '../../assets/fonts/Inter-SemiBold', 600, normal, ttf);
+@include font-face('Inter', '../../assets/fonts/Inter-Bold', 700, normal, ttf);
+// Import files
+@import 'variables';
+@import 'reset';
+@import 'template';
+// @import 'core/header';
+// @import 'core/navbar';
+// @import 'core/footer';
+@import 'form';
+@import 'grid';
+// @import 'core/soc';
+// @import 'core/breadcrumb';
+// @import 'core/pagination';
+@import 'buttons';
+// @import 'core/video';
+//@import 'react-dropdown-now';
+@import 'rnd';
+@import 'icons';
+
+.emptyScreen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 4em;
+
+    &__img {
+        width: 18em;
+        max-width: 100%;
+
+        @media (min-width: 768px) {
+            width: 23.9375em;
+        }
+
+        @media (max-width: 767px) and (orientation: 'landscape') {
+            margin-top: 2em;
+            width: 14em;
+        }
+    }
+
+    &__text {
+        font-size: 1em;
+        font-weight: 600;
+        line-height: 1.2;
+        max-width: 22.13em;
+
+        @media (min-width: 768px) {
+            font-size: 1.5em;
+        }
+    }
+}
+
+.scrolledBox {
+    background: #f5f8fa;
+    border: 1px solid #bec9d3;
+    border-radius: 0.125em;
+    padding: 0.8125em;
+    color: #595c6c;
+
+    .dark & {
+        background: #363a45;
+        border: 1px solid #4a4f5b;
+        color: $color_withe;
+    }
+
+    > * {
+        font-size: 0.75em;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        // border-color: #F5F8FA;
+
+        .dark & {
+            // border-color: #363A45;
+        }
+    }
+}
+
+.versionModal {
+    max-height: 19.4375em;
+    overflow-y: auto;
+    @extend %scrollbar;
+
+    h3 {
+    }
+
+    ul {
+        padding: 0 0 0 1.2em;
+
+        li {
+            margin-bottom: 0.5em;
+        }
+    }
+}
+
+.watch-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.devicepicker {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    max-height: 60vh;
+    overflow-y: auto;
+    @extend %scrollbar;
+
+    li {
+        cursor: pointer;
+        font-size: 1.1em;
+        padding: 0.5em;
+
+        &:hover {
+            background: #3fa9f5;
+        }
+    }
+}
+
+.notification {
+    margin-top: 0;
+    padding: 0.625em 1.3125em 0.625em 3.625em;
+    border-radius: 0.125em;
+    box-shadow: none;
+    backdrop-filter: blur(0.125em);
+    opacity: 1;
+    font-size: 1em;
+
+    &:nth-child(n + 2) {
+        margin-top: 0.6875em;
+    }
+
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: 0.2em;
+        margin-top: -0.875em;
+        display: block;
+        font-family: 'Notification';
+        width: 1.75em;
+        height: 1.75em;
+        font-size: 1.75em;
+        text-align: center;
+        line-height: 1.75em;
+    }
+
+    &-container {
+        width: 20em;
+        padding: 0.6875em 0.625em;
+        max-height: calc(100% - 1.875em);
+    }
+
+    &-success {
+        background: rgba(3, 201, 141, 0.9);
+    }
+
+    &-info {
+        background: rgba(#2f96b4, 0.9);
+    }
+
+    &-warning {
+        background: rgba(229, 190, 51, 0.9);
+    }
+
+    &-error {
+        background: rgba(247, 86, 86, 0.9);
+    }
+
+    &-enter-done {
+    }
+
+    &-message {
+    }
+
+    .title {
+        font-size: 1;
+    }
+
+    .message {
+        font-size: 0.875em;
+    }
+}
+
+.dropdown .react-colorful {
+    width: 100%;
+    height: auto;
+    // flex-direction: row;
+    margin-bottom: 0.7em;
+    &__saturation {
+        width: 100%;
+        // width: calc(100% - 3em);
+        height: 14.375em;
+        border-radius: 0;
+        margin: 0;
+        // margin-right: 0.7em;
+        margin-bottom: 0.7em;
+        // flex: none;
+    }
+    &__interactive {
+    }
+    &__pointer {
+        // display: none;
+        width: 0.7em;
+        height: 0.7em;
+        border: 1px solid $color_withe;
+    }
+    &__saturation-pointer {
+    }
+    &__pointer-fill {
+    }
+    &__hue {
+        border-radius: 0;
+        height: 1.2em;
+        // width: 1.2em;
+        // height: auto;
+        // flex: none;
+        // background: linear-gradient(0deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red);
+    }
+    &__last-control {
+        .react-colorful__interactive {
+            // width: 100%;
+            // height: 100%;
+            // right: auto;
+            // bottom: auto;
+            // transform: rotate(90deg);
+        }
+    }
+    &__hue-pointer {
+    }
+}

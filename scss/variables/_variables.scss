@@ -1,0 +1,153 @@
+/* Global variables */
+/* ======================================================================== */
+$main_font_family: 'Inter';
+// $second_font_family: "Arial";
+$main_color: #fff;
+$main_line_height: 1;
+$main_font_size: 16px;
+
+$dark_theme_background: #1e1f25;
+$dark_theme_color: #ceced6;
+$dark_footer_color: #d1d1d1;
+$dark_border_color: $dark_theme_color;
+$dark_header_background: #16171d;
+$dark_footer_bg: #16171d;
+
+$light_theme_background: #ffffff;
+$light_theme_color: #1e1f25;
+$light_drop_color: #666f7e;
+$light_border_color: #808b91;
+$light_header_background: #215794;
+$light_footer_color: #7c8195;
+
+$container_width: 80em;
+
+$footer_height: auto;
+
+$icon_battery-full: '\e933';
+$icon_battery-middle: '\e934';
+$icon_battery-min: '\e935';
+$icon_battery-charge: '\e936';
+$icon_speed-dashboard: '\e937';
+$icon_temperature: '\e938';
+$icon_arrow-sort: '\e932';
+$icon_zoom: '\e931';
+$icon_turn-on: '\e900';
+$icon_sort-desc: '\e901';
+$icon_sort-asc: '\e902';
+$icon_caret: '\e903';
+$icon_check: '\e904';
+$icon_grid: '\e905';
+$icon_smartphone: '\e906';
+$icon_file: '\e907';
+$icon_camera: '\e908';
+$icon_toggler: '\e909';
+$icon_full-screen: '\e90a';
+$icon_gear: '\e90b';
+$icon_minus: '\e90c';
+$icon_plus: '\e90d';
+$icon_pause: '\e90e';
+$icon_play: '\e90f';
+$icon_stop: '\e910';
+$icon_marker-plus: '\e911';
+$icon_marker-minus: '\e912';
+$icon_bluetooth: '\e913';
+$icon_usb: '\e914';
+$icon_remote-control: '\e915';
+$icon_speedometer: '\e916';
+$icon_pulse: '\e917';
+$icon_dotts: '\e918';
+$icon_update: '\e919';
+$icon_timer: '\e91a';
+$icon_range-plus: '\e91b';
+$icon_range-minus: '\e91c';
+$icon_cursor-mode: '\e91d';
+$icon_trash: '\e91e';
+$icon_export: '\e91f';
+$icon_import: '\e920';
+$icon_printer: '\e921';
+$icon_record: '\e922';
+$icon_xls: '\e923';
+$icon_csv: '\e924';
+$icon_log: '\e925';
+$icon_sensors: '\e926';
+$icon_bullet-list: '\e927';
+$icon_sun: '\e928';
+$icon_moon: '\e929';
+$icon_question: '\e92a';
+$icon_close: '\e92b';
+$icon_capture: '\e92c';
+$icon_drag: '\e92d';
+$icon_table-mob: '\e92e';
+$icon_chart-mob: '\e92f';
+$icon_change: '\e930';
+
+// Color collection for elements
+$color_primary: #742abe;
+$color_success: #36a566;
+$color_info: #03a9f4;
+$color_warning: #fca33e;
+$color_danger: #ff1a1a;
+$color_withe: #ffffff;
+
+$el-colors: (
+    primary: $color_primary,
+    // color for .element__primary
+    success: $color_success,
+    // color for .element__success
+    info: $color_info,
+    // color for .element__info
+    warning: $color_warning,
+    // color for .element__warning
+    danger: $color_danger,
+    // color for .element__danger
+);
+
+/* Grid */
+/* ======================================================================== */
+$grid_padding: 20px;
+
+/* Form */
+/* ======================================================================== */
+// Input variables
+
+// Input color
+$input_color: #595c6c;
+$input_bg_color: #f5f8fa;
+$input_border_color: #bec9d3;
+$input_placeholder_color: $input_color;
+
+// Input hover color
+$input_hover_color: $main_color;
+$input_hover_bg_color: $input_bg_color;
+$input_hover_border_color: $input_border_color;
+$input_hover_placeholder_color: $input_placeholder_color;
+
+// Input focus color
+$input_focus_color: $main_color;
+$input_focus_bg_color: $input_bg_color;
+$input_focus_border_color: $input_border_color;
+$input_focus_placeholder_color: $input_placeholder_color;
+
+// Input disabled color
+$input_disabled_color: #fff;
+$input_disabled_bg_color: #ccc;
+$input_disabled_border_color: #ccc;
+$input_disabled_placeholder_color: #fff;
+
+// Input error color
+$input_error_color: red;
+$input_error_bg_color: $input_bg_color;
+$input_error_border_color: red;
+$input_error_placeholder_color: red;
+
+// Button variables
+$btn_default_bg_color: #00b5ff;
+$btn_default_text_color: $color_withe;
+$btn_contrast_text_color: $color_withe;
+$btn_default_bg_color_hover: #67d3ff;
+$btn_default_bg_color_active: darken($btn_default_bg_color, 2%);
+$btn_dark_bg_color: #3aaddd;
+$btn_dark_text_color: $color_withe;
+$btn_dark_bg_color_hover: darken($btn_dark_bg_color, 1%);
+$btn_dark_bg_color_active: darken($btn_default_bg_color, 2%);

@@ -130,6 +130,23 @@ function saveBoardNametoLocalStorage() {
 }
 // Refresh recent boards list on each page show
 window.addEventListener("pageshow", saveBoardNametoLocalStorage);
+window.addEventListener("message", (event) => {
+	if(!event.data)
+		return;
+	if(event.data.source !== 'cor')
+		return;
+
+	if(event.data.type === 'userInfo') {
+		localStorage.setItem('userInfo', JSON.stringify(event.data.payload));
+	}
+	if(event.data.type === 'set_tool') {
+		let toolName = event.data.payload.toolName;
+		Tools.change(toolName);
+	}
+
+
+});
+
 
 Tools.HTML = {
 	template: new Minitpl("#tools > .tool"),

@@ -6,9 +6,7 @@
     <title>{{board}} | Whiteboard | {{translations.collaborative_whiteboard}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="../board.css"/>
-    <link rel="stylesheet" type="text/css" href="../ui.css"/>
-    <link rel="stylesheet" type="text/css" href="../footer.css"/>
-    <link rel="stylesheet" type="text/css" href="../modal.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
     <script src="../socket.io/socket.io.js"></script>
     <meta name="description" content="{{translations.tagline}}"/>
     <meta name="keywords"
@@ -27,178 +25,146 @@
 </head>
 
 <body>
-            <div id="board">
-                <svg id="canvas" width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <defs id="defs"></defs>
-                    <g id="drawingArea"></g>
-                    <g id="cursors"></g>
-                </svg>
-            </div>
+    <div class="board_wrapper">
+        <div id="board">
+            <svg id="canvas" width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <defs id="defs"></defs>
+                <g id="drawingArea"></g>
+                <g id="cursors"></g>
+            </svg>
+        </div>
+        <div class="tool" id="toolbar">
+            <div class="tool__row">
+                <div class="tool__col">
+                    <ul class="tool__list">
+                        <li class="tool__item" id="tool-Pencil" title="Карандаш (горячая клавиша: p) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Pencil')"><i class="cor_icon_tassel"></i></li>
+                        <li class="tool__item" id="tool-Straight line" title="Прямая линия (горячая клавиша: l) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Straight line')"><i class="cor_icon_tassel"></i></li>
+                        <li class="tool__item" id="tool-Rectangle" title="Прямоугольник (горячая клавиша: r) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Rectangle')"><i class="cor_icon_rectangle"></i></li>
+                        <li class="tool__item" id="tool-Ellipse" title="Эллипс (горячая клавиша: c) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Ellipse')"><i class="cor_icon_ellipse"></i></li>
+                        <li class="tool__item" id="tool-Text" title="Текст (горячая клавиша: t)" onclick="ToolBar.setTool('Text')"><i class="cor_icon_text"></i></li>
+                        <li class="tool__item" id="tool-Hand" title="Рука (горячая клавиша: h) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Hand')"><i class="cor_icon_hand"></i></li>
+                        <li class="tool__item" id="tool-Eraser" title="Ластик (горячая клавиша: e)" onclick="ToolBar.setTool('Eraser')"><i class="cor_icon_eraser"></i></li>
+                        <li class="tool__item" id="tool-Zoom" title="Лупа (горячая клавиша: z)" onclick="ToolBar.setTool('Zoom')"><i class="cor_icon_glass"></i></li>
+                        <li class="tool__item" id="tool-Picture" title="picture" onclick="ToolBar.setTool('Picture')"><i class="cor_icon_picture"></i></li>
+                    </ul>
+                </div>
+                <div class="tool__col">
+                    <ul class="tool__list">
+                        <li class="tool__item tool__item_weihgt">
+                            <div class="tool__weihgt">
+                                <span id="tool__weight_color" style="width: 8px; height: 8px; background: #F9DE80;"></span>
+                            </div>
+                            <div class="tool__change"><button class="minus" id="weihgtMinus" type="button" onclick="ToolBar.decrementSize()"><i class="cor_icon_show-more"></i></button>
+                                <input id="weight" type="number" step="1" min="3" max="24" value="8" readonly>
+                                <button class="plus" id="weihgtPlus" type="button" onclick="ToolBar.incrementSize()"><i class="cor_icon_show-more"></i></button>
+                            </div>
+                        </li>
+                        <li class="tool__item tool__item_color">
+                            <div class="tool__color"><span id="tool__current_color" style="background-color: #F9DE80"></span></div>
 
-            <div id="loadingMessage">{{translations.loading}}</div>
-
-            <div id="menu" tabindex="0" class="{{theme}}" {{#hideMenu}}style="display:none;" {{/hideMenu}}">
-            <div id="menuItems">
-                <ul id="tools" class="tools">
-                    <li class="tool" tabindex="-1">
-                        <img class="tool-icon" width="35" height="35" src="" alt="icon"/>
-                        <span class="tool-name"></span>
-                        <img class="tool-icon secondaryIcon" width="35" height="35" src="data:," alt="icon"/>
-                    </li>
-                </ul>
-
-                <ul class="tools" id="settings">
-                    <li class="tool" tabindex="-1">
-                        <input class="tool-icon" type="color" id="chooseColor" value="#1913B0"/>
-                        <label class="tool-name" for="chooseColor">{{translations.color}}</label>
-                        <span class="colorPresets" id="colorPresetSel">
-						<span class="colorPresetButton"></span>
-					</span>
-                    </li>
-                    <li class="tool" tabindex="-1"
-                        title="{{translations.size}} ({{translations.keyboard_shortcut}}: alt + {{translations.mousewheel}})">
-                        <img class="tool-icon" width="60" height="60" src="icon-size.svg" alt="size"/>
-                        <label class="tool-name slider" for="chooseSize">
-                            <span>{{translations.size}}</span>
-                            <input type="range" id="chooseSize" value="4" min="1" max="50" step="1"
-                                   class="rangeChooser"/>
-                        </label>
-                    </li>
-                    <li class="tool" tabindex="-1">
-					<span class="tool-icon">
-						<svg viewBox="0 0 8 8">
-							<pattern id="opacityPattern" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
-								<rect x=0 y=0 width=2 height=2 fill=black></rect>
-								<rect x=2 y=2 width=2 height=2 fill=black></rect>
-								<rect x=2 y=0 width=2 height=2 fill=#eeeeee></rect>
-								<rect x=0 y=2 width=2 height=2 fill=#eeeeee></rect>
-							</pattern>
-							<circle cx=4 cy=4 id="opacityIndicator" r=3.5 fill="url(#opacityPattern)"></circle>
-						</svg>
-					</span>
-                        <label class="tool-name slider" for="chooseOpacity">
-                            <span>{{translations.opacity}}</span>
-                            <input type="range" id="chooseOpacity" value="1" min="0.2" max="1" step="0.1"
-                                   class="rangeChooser"/>
-                        </label>
-                    </li>
-                </ul>
+                            <div class="tool__select">
+                                <span id="color-0" title="горячая клавиша: 1" style="background-color: #001f3f" onclick="ToolBar.setColor(0, '#001f3f')"></span>
+                                <span id="color-1" title="горячая клавиша: 2" style="background-color: #FF4136" onclick="ToolBar.setColor(1, '#FF4136')"></span>
+                                <span id="color-2" title="горячая клавиша: 3" style="background-color: #0074D9" onclick="ToolBar.setColor(2, '#0074D9')"></span>
+                                <span id="color-3" title="горячая клавиша: 4" style="background-color: #FF851B" onclick="ToolBar.setColor(3, '#FF851B')"></span>
+                                <span id="color-4" title="горячая клавиша: 5" style="background-color: #FFDC00" onclick="ToolBar.setColor(4, '#FFDC00')"></span>
+                                <span id="color-5" title="горячая клавиша: 6" style="background-color: #3D9970" onclick="ToolBar.setColor(5, '#3D9970')"></span>
+                                <span id="color-6" title="горячая клавиша: 7" style="background-color: #91E99B" onclick="ToolBar.setColor(6, '#91E99B')"></span>
+                                <span id="color-7" title="горячая клавиша: 8" style="background-color: #90468b" onclick="ToolBar.setColor(7, '#90468b')"></span>
+                                <span id="color-8" title="горячая клавиша: 9" style="background-color: #7FDBFF" onclick="ToolBar.setColor(8, '#7FDBFF')"></span>
+                                <span id="color-9" title="горячая клавиша: 0" style="background-color: #AAAAAA" onclick="ToolBar.setColor(9, '#AAAAAA')"></span>
+                            </div>
+                        </li>
+                        <li class="tool__item tool__item_opacity">
+                            <div class="tool__opacity"><i class="cor_icon_eye" style="opacity: 15%;"></i></div>
+                            <div class="tool__change"><button class="minus" id="opacityMinus" type="button" onclick="ToolBar.decrementOpacity()"><i class="cor_icon_show-more"></i></button>
+                                <input id="opacity" type="number" step="5" min="10" max="100" value="15" readonly>
+                                <button class="plus" id="opacityPlus" type="button" onclick="ToolBar.incrementOpacity()"><i class="cor_icon_show-more"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tool__col">
+                    <ul class="tool__list">
+                        <li class="tool__item" id="tool-id-10" title="Сетка (горячая клавиша: g)" onclick="ToolBar.toggleGrid()"><i class="cor_icon_lattice"></i></li>
+                        <li class="tool__item" id="tool-Download" title="Скачать (горячая клавиша: d)" onclick="ToolBar.setTool('Download')"><i class="cor_icon_download"></i></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <footer class="footer" style="position: fixed;bottom: 0;width: -webkit-fill-available;">
-            <div class="modal">
-                <div class="modal__dialog modal__dialog_xs">
-                    <div class="modal__message">Вы хотите отключить usb устройства?</div>
-                    <div class="modal__action">
-                        <button class="btn">Отключить</button>
-                        <button class="btn btn_border">Отмена</button>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__group">
-                <div class="footer__label">Источник <br>cигнала</div>
-                <div class="footer__btns">
-                    <div class="btDrop">
-                        <button title="Bluetooth соединение" class="icon_bluetooth"></button>
-                    </div>
-                    <div class="btDrop">
-                        <button title="USB соединение" class="icon_usb"></button>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__group landscape">
-                <div class="footer__label">Доп. <br>действия</div>
-                <div class="footer__btns">
-                    <button class="icon_pulse" title="Стили графиков" disabled=""></button>
-                    <button class="icon_speedometer" title="Градуировка датчика" disabled=""></button>
-                    <button class="icon_remote-control" disabled="" title="Установить каналы"></button>
-                    <button class="icon_battery-charge" disabled="" title="Заряд батареи"></button>
-                </div>
-            </div>
-            <div class="footer__group footer__group_center">
-                <div class="footer__btns">
-                    <button disabled="" title="Таймер" class="icon_timer"></button>
-                    <div class="playPaused">
-                        <button class="icon_stop" type="button" title="Стоп" disabled=""></button>
-                        <button class="playPause" title="Пуск/пауза" type="button" disabled="" style="display: flex;"><i
-                                class="icon_play"></i></button>
-                    </div>
-                </div>
-                <div title="Формат времени" class="timer"><input type="text" readonly="" value="00:00:000">
-                    <div data-testid="dropdown-root" class="rdn">
-                        <div data-testid="dropdown-control" role="presentation" class="rdn-control">
-                            <div data-testid="dropdown-placeholder" class="rdn-control-placeholder is-selected">MM:СС.Mс
-                            </div>
-                            <div data-testid="dropdown-arrow" class="rdn-control-arrow"><span
-                                    class="rdn-control-arrow-icon"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__group landscape">
-                <div class="footer__label">Точки <br>и диап.</div>
-                <div class="footer__btns footer__btns_group">
-                    <button class="rangeDrop" disabled=""><i title="Установить диапазоны" class="icon_range-plus"></i>
-                        <div class="rangeDrop__list"></div>
-                    </button>
-                    <button class="icon_range-minus" title="Удалить диапазоны" disabled=""></button>
-                    <button class="icon_marker-plus" disabled="" title="Установить маркеры"></button>
-                    <button class="icon_marker-minus" title="Удалить маркеры" disabled=""></button>
-                    <button class="icon_cursor-mode" disabled="" title="Курсор"></button>
-                    <button class="icon_trash" title="Очистить график" disabled=""></button>
-                </div>
-            </div>
-            <div class="footer__group">
-                <div class="footer__label">Работа <br>с файлами</div>
-                <div class="footer__btns">
-                    <div class="docs">
-                        <div class="docs__drop">
-                            <div class="docs__toggle docs__item"><i class="icon_import"></i><span>Импорт</span></div>
-                            <div class="docs__list">
-                                <button class="docs__item" disabled=""><i class="icon_record"></i><span>Запись</span>
-                                </button>
-                                <label class="docs__item"><i class="icon_xls"></i><span>XLS</span><input
-                                        accept=".xls,.xlsx"
-                                        type="file"></label><label
-                                    class="docs__item"><i class="icon_csv"></i><span>CSV</span><input accept=".csv"
-                                                                                                      type="file"></label>
-                            </div>
-                        </div>
-                        <div class="docs__drop">
-                            <div class="docs__toggle docs__item"><i class="icon_export"></i><span>Экспорт</span></div>
-                            <div class="docs__list">
-                                <button class="docs__item" disabled=""><i class="icon_log"></i><span>Лог</span></button>
-                                <button class="docs__item" disabled=""><i class="icon_xls"></i><span>XLS</span></button>
-                                <button class="docs__item" disabled=""><i class="icon_csv"></i><span>CSV</span></button>
-                            </div>
-                        </div>
-                        <button title="Печать" disabled="" class="docs__btn icon_printer"></button>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    </div>
 
-<script type="application/json" id="translations">{{{ json translations }}}</script>
-<script type="application/json" id="configuration">{{{ json configuration }}}</script>
-<script type="application/json" id="moderator">{{{ json moderator }}}</script>
-<script src="../js/path-data-polyfill.js"></script>
-<script src="../js/minitpl.js"></script>
-<script src="../js/intersect.js"></script>
-<script src="../js/board.js"></script>
-<script src="../tools/pencil/wbo_pencil_point.js"></script>
-<script src="../tools/pencil/pencil.js"></script>
-<script src="../tools/cursor/cursor.js"></script>
-<script src="../tools/line/line.js"></script>
-<script src="../tools/rect/rect.js"></script>
-<script src="../tools/ellipse/ellipse.js"></script>
-<script src="../tools/text/text.js"></script>
-<script src="../tools/eraser/eraser.js"></script>
-<script src="../tools/hand/hand.js"></script>
-<script src="../tools/grid/grid.js"></script>
-<script src="../tools/download/download.js"></script>
-<script src="../tools/zoom/zoom.js"></script>
-<script src="../tools/clear/clear.js"></script>
-<script src="../js/canvascolor.js"></script>
-</body>
+    <div id="loadingMessage">{{translations.loading}}</div>
 
+    <div id="menu" tabindex="0" class="{{theme}}" {{#hideMenu}}style="display:none;" {{/hideMenu}}">
+    <div id="menuItems">
+        <ul id="tools" class="tools">
+            <li class="tool" tabindex="-1">
+                <img class="tool-icon" width="35" height="35" src="" alt="icon"/>
+                <span class="tool-name"></span>
+                <img class="tool-icon secondaryIcon" width="35" height="35" src="data:," alt="icon"/>
+            </li>
+        </ul>
+
+        <ul class="tools" id="settings">
+            <li class="tool" tabindex="-1">
+                <input class="tool-icon" type="color" id="chooseColor" value="#1913B0"/>
+                <label class="tool-name" for="chooseColor">{{translations.color}}</label>
+                <span class="colorPresets" id="colorPresetSel">
+            <span class="colorPresetButton"></span>
+        </span>
+            </li>
+            <li class="tool" tabindex="-1"
+                title="{{translations.size}} ({{translations.keyboard_shortcut}}: alt + {{translations.mousewheel}})">
+                <img class="tool-icon" width="60" height="60" src="icon-size.svg" alt="size"/>
+                <label class="tool-name slider" for="chooseSize">
+                    <span>{{translations.size}}</span>
+                    <input type="range" id="chooseSize" value="4" min="1" max="50" step="1"
+                           class="rangeChooser"/>
+                </label>
+            </li>
+            <li class="tool" tabindex="-1">
+        <span class="tool-icon">
+            <svg viewBox="0 0 8 8">
+                <pattern id="opacityPattern" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+                    <rect x=0 y=0 width=2 height=2 fill=black></rect>
+                    <rect x=2 y=2 width=2 height=2 fill=black></rect>
+                    <rect x=2 y=0 width=2 height=2 fill=#eeeeee></rect>
+                    <rect x=0 y=2 width=2 height=2 fill=#eeeeee></rect>
+                </pattern>
+                <circle cx=4 cy=4 id="opacityIndicator" r=3.5 fill="url(#opacityPattern)"></circle>
+            </svg>
+        </span>
+                <label class="tool-name slider" for="chooseOpacity">
+                    <span>{{translations.opacity}}</span>
+                    <input type="range" id="chooseOpacity" value="1" min="0.2" max="1" step="0.1"
+                           class="rangeChooser"/>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <script type="application/json" id="translations">{{{ json translations }}}</script>
+    <script type="application/json" id="configuration">{{{ json configuration }}}</script>
+    <script type="application/json" id="moderator">{{{ json moderator }}}</script>
+
+    <script src="../js/path-data-polyfill.js"></script>
+    <script src="../js/minitpl.js"></script>
+    <script src="../js/intersect.js"></script>
+    <script src="../js/board.js"></script>
+    <script src="../js/toolbar.js"></script>
+    <script src="../tools/pencil/wbo_pencil_point.js"></script>
+    <script src="../tools/pencil/pencil.js"></script>
+    <script src="../tools/cursor/cursor.js"></script>
+    <script src="../tools/line/line.js"></script>
+    <script src="../tools/rect/rect.js"></script>
+    <script src="../tools/ellipse/ellipse.js"></script>
+    <script src="../tools/text/text.js"></script>
+    <script src="../tools/eraser/eraser.js"></script>
+    <script src="../tools/hand/hand.js"></script>
+    <script src="../tools/grid/grid.js"></script>
+    <script src="../tools/download/download.js"></script>
+    <script src="../tools/zoom/zoom.js"></script>
+    <script src="../tools/clear/clear.js"></script>
+    <script src="../js/canvascolor.js"></script>
+    </body>
 </html>

@@ -55,6 +55,7 @@
         y: 0,
         color: Tools.getColor(),
         size: Tools.getSize(),
+        userName: getUserName()
     };
 
     function handleMarker(x, y) {
@@ -85,29 +86,54 @@
 
     var cursorsElem = Tools.svg.getElementById("cursors");
 
-    function createCursor(id) {
+    function createCursor(id, userName) {
+        var cursorGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        cursorGroup.setAttributeNS(null, "id", id);
         var cursor = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         cursor.setAttributeNS(null, "class", "opcursor");
-        cursor.setAttributeNS(null, "id", id);
         cursor.setAttributeNS(null, "cx", 0);
         cursor.setAttributeNS(null, "cy", 0);
         cursor.setAttributeNS(null, "r", 10);
-        cursorsElem.appendChild(cursor);
+
+        var userLabel = Tools.createSVGElement("text");
+        userLabel.setAttribute("x", 5);
+        userLabel.setAttribute("y", -20);
+        userLabel.setAttribute("font-size", 12);
+        //userLabel.setAttribute("fill", "red");
+        userLabel.setAttribute("opacity", 1);
+        userLabel.textContent = userName;
+        cursorGroup.appendChild(cursor);
+        cursorGroup.appendChild(userLabel);
+        cursorsElem.appendChild(cursorGroup);
         setTimeout(function () {
-            cursorsElem.removeChild(cursor);
+            cursorsElem.removeChild(cursorGroup);
         }, CURSOR_DELETE_AFTER_MS);
-        return cursor;
+        return cursorGroup;
     }
 
-    function getCursor(id) {
-        return document.getElementById(id) || createCursor(id);
+    function getUserName() {
+        let userInfoStr = localStorage.getItem('userInfo');
+        if(!userInfoStr)
+            return "";
+        let userInfo = JSON.parse(userInfoStr);
+        return userInfo.userName;
+    }
+
+    function getCursor(id, userName) {
+        return document.getElementById(id) || createCursor(id, userName);
     }
 
     function draw(message) {
-        var cursor = getCursor("cursor-" + (message.socket || 'me'));
+        var cursor = getCursor("cursor-" + (message.socket || 'me'), message.userName);
+        setUserName(cursor, message.userName);
         cursor.style.transform = "translate(" + message.x + "px, " + message.y + "px)";
         if (Tools.isIE) cursor.setAttributeNS(null, "transform", "translate(" + message.x + " " + message.y + ")");
         cursor.setAttributeNS(null, "fill", message.color);
         cursor.setAttributeNS(null, "r", message.size / 2);
+    }
+
+    function setUserName(cursor, name) {
+        let text = cursor.getElementsByTagName('text')
+        text.textContent = name;
     }
 })();

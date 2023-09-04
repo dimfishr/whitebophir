@@ -33,7 +33,7 @@
                 <g id="cursors"></g>
             </svg>
         </div>
-        <div class="tool" id="toolbar">
+        {{#corMenu}}<div class="tool" id="toolbar" {{#hideMenu}}style="display:none;" {{/hideMenu}}>
             <div class="tool__row">
                 <div class="tool__col">
                     <ul class="tool__list">
@@ -92,11 +92,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>{{/corMenu}}
 
     <div id="loadingMessage">{{translations.loading}}</div>
 
-    <div id="menu" tabindex="0" class="{{theme}}" {{#hideMenu}}style="display:none;" {{/hideMenu}}">
+    <div id="menu" tabindex="0" class="{{theme}}" {{#if hideNativeMenu}}style="display:none;"{{/if}}>
     <div id="menuItems">
         <ul id="tools" class="tools">
             <li class="tool" tabindex="-1">

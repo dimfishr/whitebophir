@@ -130,23 +130,6 @@ function saveBoardNametoLocalStorage() {
 }
 // Refresh recent boards list on each page show
 window.addEventListener("pageshow", saveBoardNametoLocalStorage);
-window.addEventListener("message", (event) => {
-	if(!event.data)
-		return;
-	if(event.data.source !== 'cor')
-		return;
-
-	if(event.data.type === 'userInfo') {
-		localStorage.setItem('userInfo', JSON.stringify(event.data.payload));
-	}
-	if(event.data.type === 'set_tool') {
-		let toolName = event.data.payload.toolName;
-		Tools.change(toolName);
-	}
-
-
-});
-
 
 Tools.HTML = {
 	template: new Minitpl("#tools > .tool"),
@@ -165,6 +148,7 @@ Tools.HTML = {
 			Tools.change(toolName);
 			document.activeElement.blur && document.activeElement.blur();
 		});
+
 		return this.template.add(function (elem) {
 			elem.addEventListener("click", callback);
 			elem.id = "toolID-" + toolName;
@@ -726,7 +710,6 @@ Tools.svg.height.baseVal.value = Tools.server_config.MAX_BOARD_SIZE_Y;
 }
 */
 
-
 (function () {
     var pos = {top: 0, scroll:0};
     var menu = document.getElementById("menu");
@@ -747,4 +730,7 @@ Tools.svg.height.baseVal.value = Tools.server_config.MAX_BOARD_SIZE_Y;
 	document.removeEventListener("mouseup", menu_mouseup);
     }
     menu.addEventListener("mousedown", menu_mousedown);
+
+	let tokenObject = JSON.parse(decodeURIComponent(escape(window.atob(Tools.token.split('.')[1]))));
+	Tools.userName = tokenObject.name;
 })()

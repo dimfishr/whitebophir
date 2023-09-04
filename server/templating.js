@@ -78,6 +78,9 @@ class BoardTemplate extends Template {
     params["boardUriComponent"] = boardUriComponent;
     params["board"] = decodeURIComponent(boardUriComponent);
     params["hideMenu"] = parsedUrl.query.hideMenu == "true" || false;
+    params["nativeMenu"] = client_config.MENU_MODE === "native";
+    params["corMenu"] = client_config.MENU_MODE === "cor";
+    params["hideNativeMenu"] = params["corMenu"] || params["hideMenu"];
     return params;
   }
 }

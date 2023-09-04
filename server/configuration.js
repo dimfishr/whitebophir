@@ -64,4 +64,6 @@ module.exports = {
   /** Secret key for jwt */
   AUTH_SECRET_KEY: (process.env["JWT_SECRET"] || ""),
 
+  MENU_MODE: (process.env["MENU_MODE"] || "cor")
+
 };

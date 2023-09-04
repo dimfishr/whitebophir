@@ -55,7 +55,7 @@
         y: 0,
         color: Tools.getColor(),
         size: Tools.getSize(),
-        userName: getUserName()
+        userName: Tools.userName
     };
 
     function handleMarker(x, y) {
@@ -109,14 +109,6 @@
             cursorsElem.removeChild(cursorGroup);
         }, CURSOR_DELETE_AFTER_MS);
         return cursorGroup;
-    }
-
-    function getUserName() {
-        let userInfoStr = localStorage.getItem('userInfo');
-        if(!userInfoStr)
-            return "";
-        let userInfo = JSON.parse(userInfoStr);
-        return userInfo.userName;
     }
 
     function getCursor(id, userName) {

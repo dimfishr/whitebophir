@@ -496,8 +496,8 @@ Tools.scale = 1.0;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
 	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
-	var minScale = Math.max(0.1, fullScale);
-	var maxScale = 12;
+	minScale = Math.max(0.1, fullScale);
+	maxScale = 12;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
 	Tools.board.style.willChange = 'transform';
@@ -514,6 +514,10 @@ Tools.setScale = function setScale(scale) {
 }
 Tools.getScale = function getScale() {
 	return Tools.scale;
+}
+
+Tools.getNormalizedScale = function () {
+	return Tools.getScale() / 12;
 }
 
 //List of hook functions that will be applied to tools before adding them

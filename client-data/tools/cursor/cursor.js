@@ -64,19 +64,19 @@
         message.y = y;
         message.color = Tools.getColor();
         message.size = Tools.getSize();
-        updateMarker();
+        updateMarker(false);
     }
 
     function onSizeChange(size) {
         message.size = size;
-        updateMarker();
+        updateMarker(true);
     }
 
-    function updateMarker() {
+    function updateMarker(immediate) {
         if (!Tools.showMarker || !Tools.showMyCursor) return;
         var cur_time = Date.now();
-        if (cur_time - lastCursorUpdate > MIN_CURSOR_UPDATES_INTERVAL_MS &&
-            (sending || Tools.curTool.showMarker)) {
+        if (immediate || (cur_time - lastCursorUpdate > MIN_CURSOR_UPDATES_INTERVAL_MS &&
+            (sending || Tools.curTool.showMarker))) {
             Tools.drawAndSend(message, cursorTool);
             lastCursorUpdate = cur_time;
         } else {
@@ -86,20 +86,19 @@
 
     var cursorsElem = Tools.svg.getElementById("cursors");
 
-    function createCursor(id, userName) {
+    function createCursor(id, userName, size) {
         var cursorGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         cursorGroup.setAttributeNS(null, "id", id);
         var cursor = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         cursor.setAttributeNS(null, "class", "opcursor");
         cursor.setAttributeNS(null, "cx", 0);
         cursor.setAttributeNS(null, "cy", 0);
-        cursor.setAttributeNS(null, "r", 10);
+        cursor.setAttributeNS(null, "r", (size === null || size === 0) ? (10).toString() : (size).toString());
 
         var userLabel = Tools.createSVGElement("text");
-        userLabel.setAttribute("x", 5);
-        userLabel.setAttribute("y", -20);
-        userLabel.setAttribute("font-size", 12);
-        //userLabel.setAttribute("fill", "red");
+        userLabel.setAttribute("x", (5 + size).toString());
+        userLabel.setAttribute("y", (-5 - size).toString());
+        userLabel.setAttribute("font-size", (12 / Tools.getScale()).toString());
         userLabel.setAttribute("opacity", 1);
         userLabel.textContent = userName;
         cursorGroup.appendChild(cursor);
@@ -111,12 +110,12 @@
         return cursorGroup;
     }
 
-    function getCursor(id, userName) {
-        return document.getElementById(id) || createCursor(id, userName);
+    function getCursor(id, userName, size) {
+        return document.getElementById(id) || createCursor(id, userName, size);
     }
 
     function draw(message) {
-        var cursor = getCursor("cursor-" + (message.socket || 'me'), message.userName);
+        var cursor = getCursor("cursor-" + (message.socket || 'me'), message.userName, message.size);
         setUserName(cursor, message.userName);
         cursor.style.transform = "translate(" + message.x + "px, " + message.y + "px)";
         if (Tools.isIE) cursor.setAttributeNS(null, "transform", "translate(" + message.x + " " + message.y + ")");

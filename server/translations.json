@@ -395,6 +395,7 @@
   "ru": {
     "board_name_placeholder": "Название доски",
     "circle": "Круг",
+    "click_to_zoom": "нажмите, чтобы увеличить",
     "click_to_toggle": "нажмите, чтобы переключиться",
     "collaborative_whiteboard": "Онлайн доска для совместного рисования",
     "color": "Цвет",

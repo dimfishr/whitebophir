@@ -22,11 +22,22 @@ ToolBar.init = function () {
     if(ToolBar.opacityElement === null) {
         console.error("Opacity element with id opacity not found. Color changing won't work");
     }
+    ToolBar.opacityIconElement = document.getElementById('tool__opacity_icon');
+    if(ToolBar.opacityIconElement === null) {
+        console.error("Opacity icon element with id tool__opacity_icon not found. Color changing won't work");
+    }
+    ToolBar.setTool(Tools.curTool === null ? 'Pencil' : Tools.curTool.name);
     ToolBar.setSize(Tools.getSize());
-    ToolBar.setTool(Tools.curTool);
+    ToolBar.setColor(Tools.getColor());
+    ToolBar.setOpacity(Tools.getOpacity());
+
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('theme') === 'dark') {
+        ToolBar.rootElement.classList.add('dark');
+    }
 }
 
-ToolBar.setColor = function(index, color) {
+ToolBar.setColor = function(color) {
     Tools.setColor(color);
     ToolBar.currentColorButton.style.backgroundColor = color;
     ToolBar.weightColorButton.style.backgroundColor = color;
@@ -52,45 +63,38 @@ ToolBar.setTool = function (name) {
 }
 
 ToolBar.incrementSize = function() {
-    let newSize = Tools.setSize(Tools.getSize() + 1);
-    ToolBar.sizeElement.value = newSize.toString();
+    ToolBar.setSize(Tools.getSize() + 1);
 }
 
 ToolBar.decrementSize = function() {
-    let newSize = Tools.setSize(Tools.getSize() - 1);
-    ToolBar.sizeElement.value = newSize.toString();
+    ToolBar.setSize(Tools.getSize() - 1);
 }
 
 ToolBar.setSize = function(size) {
     let newSize = Tools.setSize(size);
     ToolBar.sizeElement.value = newSize.toString();
+    ToolBar.weightColorButton.style.height = Math.min(newSize, 30).toString() + 'px';
+    ToolBar.weightColorButton.style.width = Math.min(newSize, 30).toString() + 'px';
 }
 
 ToolBar.incrementOpacity = function() {
     let chooser = document.getElementById("chooseOpacity");
-    let opacityIndicator = document.getElementById("opacityIndicator");
-    let value = Math.max(0.1, Math.min(1, parseFloat(chooser.value) + 0.1));
-    opacityIndicator.setAttribute("opacity", value);
-    chooser.value = value;
-    ToolBar.opacityElement.value = value.toFixed(2) * 100;
+    ToolBar.setOpacity(parseFloat(chooser.value) + 0.1);
 }
 
 ToolBar.decrementOpacity = function() {
     let chooser = document.getElementById("chooseOpacity");
-    let opacityIndicator = document.getElementById("opacityIndicator");
-    let value = Math.max(0.1, Math.min(1, parseFloat(chooser.value) - 0.1));
-    opacityIndicator.setAttribute("opacity", value);
-    chooser.value = value;
-    ToolBar.opacityElement.value = value.toFixed(2) * 100;
+    ToolBar.setOpacity(parseFloat(chooser.value) - 0.1);
 }
 
 ToolBar.setOpacity = function(opacity) {
     let chooser = document.getElementById("chooseOpacity");
     let opacityIndicator = document.getElementById("opacityIndicator");
-    let value = Math.max(0.1, Math.min(1, parseFloat(opacity) - 0.1));
+    let value = Math.max(0.1, Math.min(1, opacity));
     opacityIndicator.setAttribute("opacity", value);
     chooser.value = value;
     ToolBar.opacityElement.value = value.toFixed(2) * 100;
+    ToolBar.opacityIconElement.style.opacity = (value.toFixed(2) * 100).toString() + '%';
 }
 
 ToolBar.toggleGrid = function() {

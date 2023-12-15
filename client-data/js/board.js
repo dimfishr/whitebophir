@@ -459,8 +459,8 @@ function updateDocumentTitle() {
 	function setScrollFromHash() {
 		var coords = window.location.hash.slice(1).split(',');
 		var x = coords[0] | 0;
-		var y = coords[1] | 0;
-		var scale = parseFloat(coords[2]);
+		var y = coords[1] | 436;
+		var scale = parseFloat(coords[2]) || 0.4;
 		resizeCanvas({ x: x, y: y });
 		Tools.setScale(scale);
 		window.scrollTo(x * scale, y * scale);
@@ -496,7 +496,7 @@ Tools.scale = 1.0;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
 	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
-	minScale = Math.max(0.1, fullScale);
+	minScale = 0.4;
 	maxScale = 12;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));

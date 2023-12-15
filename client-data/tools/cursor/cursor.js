@@ -93,7 +93,7 @@
         cursor.setAttributeNS(null, "class", "opcursor");
         cursor.setAttributeNS(null, "cx", 0);
         cursor.setAttributeNS(null, "cy", 0);
-        cursor.setAttributeNS(null, "r", (size === null || size === 0) ? (10).toString() : (size).toString());
+        cursor.setAttributeNS(null, "r", (size === null || size === 0) ? (10).toString() : (size / 2).toString());
 
         var userLabel = Tools.createSVGElement("text");
         userLabel.setAttribute("x", (5 + size).toString());

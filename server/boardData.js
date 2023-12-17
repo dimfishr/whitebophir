@@ -174,11 +174,7 @@ class BoardData {
         this.addChild(message.parent, message);
         break;
       case "clear":
-        if(jwtauth.roleInBoard(message.token,message.board) === 'moderator') {
-          this.clear();
-        } else {
-          throw new Error("User is not a moderator");
-        }
+        this.clear();
         break;
       default:
         //Add data

@@ -96,6 +96,9 @@
 .cor_icon_chemistry:before {
   content: "\e917";
 }
+.cor_icon_clear-all:before {
+  content: "\e91b";
+}
 .cor_icon_clip:before {
   content: "\e918";
 }

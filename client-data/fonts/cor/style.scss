@@ -146,6 +146,11 @@
     content: $cor_icon_chemistry; 
   }
 }
+.cor_icon_clear_all {
+  &:before {
+    content: $cor_icon_clear_all;
+  }
+}
 .cor_icon_clip {
   &:before {
     content: $cor_icon_clip; 

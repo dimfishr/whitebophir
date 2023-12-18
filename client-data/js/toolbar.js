@@ -101,4 +101,15 @@ ToolBar.toggleGrid = function() {
     Tools.change('Grid');
 }
 
+
+
+ToolBar.clearBoard = function() {
+    var msg = {
+        "type": "clear",
+        "id": "",
+        "token": Tools.token
+    };
+    Tools.drawAndSend(msg, Tools.list["Clear"]);
+}
+
 ToolBar.init();

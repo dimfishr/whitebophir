@@ -498,6 +498,7 @@ Tools.setScale = function setScale(scale) {
 	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
 	minScale = 0.4;
 	maxScale = 12;
+
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
 	Tools.board.style.willChange = 'transform';

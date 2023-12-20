@@ -1,6 +1,12 @@
 ToolBar = {}
 
 ToolBar.init = function () {
+    window.addEventListener('message', event => {
+        if (event.data?.type === 'fontResize' && event.data?.data) {
+            const toolRow = document.querySelector(".tool__row");
+            toolRow.style.fontSize = `${event.data.data}px`;
+        }
+    });
     ToolBar.rootElement = document.getElementById("toolbar");
     if(ToolBar.rootElement === null) {
         console.error("Toolbar root element with id toolbar not found. Toolbar won't work!")
@@ -35,6 +41,9 @@ ToolBar.init = function () {
     if(params.get('theme') === 'dark') {
         ToolBar.rootElement.classList.add('dark');
     }
+    
+    const fontSize = params.get('fontSize');
+    console.log('fontSize', fontSize)
 }
 
 ToolBar.setColor = function(color) {
@@ -48,6 +57,7 @@ ToolBar.setTool = function (name) {
         return;
     }
     let toolElementName = 'tool-' + name;
+    console.log('toolElementName', toolElementName)
     let toolButton = document.getElementById(toolElementName);
     if(toolButton === null) {
         console.error("Toolbar element " + toolElementName + ' for tool ' + name + ' not found. Tool switch wont happen!');

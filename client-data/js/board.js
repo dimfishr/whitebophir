@@ -499,7 +499,6 @@ Tools.setScale = function setScale(scale) {
 
 	minScale = 0.2;
 	maxScale = 12;
-	console.log('WBO_MAX_BOARD_SIZE',Tools.server_config)
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
 	Tools.board.style.willChange = 'transform';

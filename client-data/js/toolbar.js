@@ -43,7 +43,6 @@ ToolBar.init = function () {
     }
     
     const fontSize = params.get('fontSize');
-    console.log('fontSize', fontSize)
 }
 
 ToolBar.setColor = function(color) {
@@ -57,7 +56,6 @@ ToolBar.setTool = function (name) {
         return;
     }
     let toolElementName = 'tool-' + name;
-    console.log('toolElementName', toolElementName)
     let toolButton = document.getElementById(toolElementName);
     if(toolButton === null) {
         console.error("Toolbar element " + toolElementName + ' for tool ' + name + ' not found. Tool switch wont happen!');

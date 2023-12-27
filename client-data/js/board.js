@@ -504,7 +504,6 @@ Tools.setScale = function setScale(scale) {
 	Tools.board.style.willChange = 'transform';
 	Tools.board.style.transform = 'scale(' + scale + ')';
 	Tools.board.style.transformOrigin = '0 0';
-	// Tools.board.style.marginLeft = Math.round(Tools.server_config.MAX_BOARD_SIZE * 0.1).toString() + "px";
 	Tools.board.style.width = Math.round(Tools.server_config.MAX_BOARD_SIZE * scale).toString() + "px";
 	Tools.board.style.height = Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * scale).toString() + "px";
 	clearTimeout(scaleTimeout);

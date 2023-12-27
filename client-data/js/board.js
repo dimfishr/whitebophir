@@ -460,7 +460,7 @@ function updateDocumentTitle() {
 		var coords = window.location.hash.slice(1).split(',');
 		var x = coords[0] | 0;
 		var y = coords[1] | 436;
-		var scale = parseFloat(coords[2]) || 0.4;
+		var scale = parseFloat(coords[2]) || 0.2;
 		resizeCanvas({ x: x, y: y });
 		Tools.setScale(scale);
 		window.scrollTo(x * scale, y * scale);
@@ -492,19 +492,20 @@ function updateUnreadCount(m) {
 // List of hook functions that will be applied to messages before sending or drawing them
 Tools.messageHooks = [resizeCanvas, updateUnreadCount];
 
-Tools.scale = 1.0;
+Tools.scale = 0.2;
 var scaleTimeout = null;
 Tools.setScale = function setScale(scale) {
 	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
 
-	minScale = 0.4;
+	minScale = 0.2;
 	maxScale = 12;
-
+	console.log('WBO_MAX_BOARD_SIZE',Tools.server_config)
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
 	Tools.board.style.willChange = 'transform';
 	Tools.board.style.transform = 'scale(' + scale + ')';
 	Tools.board.style.transformOrigin = '0 0';
+	// Tools.board.style.marginLeft = Math.round(Tools.server_config.MAX_BOARD_SIZE * 0.1).toString() + "px";
 	Tools.board.style.width = Math.round(Tools.server_config.MAX_BOARD_SIZE * scale).toString() + "px";
 	Tools.board.style.height = Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * scale).toString() + "px";
 	clearTimeout(scaleTimeout);
@@ -546,8 +547,10 @@ Tools.toolHooks = [
 
 		function compile(listener) { //closure
 			return (function listen(evt) {
-				var x = evt.pageX / Tools.getScale() - BOARD_X_BASE,
-					y = evt.pageY / Tools.getScale() - BOARD_Y_BASE;
+				var x = evt.offsetX,
+					y = evt.offsetY;
+			/*	var x = evt.pageX / Tools.getScale() - BOARD_X_BASE,
+					y = evt.pageY / Tools.getScale() - BOARD_Y_BASE;*/
 				return listener(x, y, evt, false);
 			});
 		}
@@ -646,7 +649,7 @@ Tools.setColor = function (color) {
 };
 
 Tools.getColor = (function color() {
-	var color_index = (Math.random() * Tools.colorPresets.length) | 0;
+	var color_index = 0;
 	var initial_color = Tools.colorPresets[color_index].color;
 	Tools.setColor(initial_color);
 	return function () { return Tools.color_chooser.value; };
@@ -691,12 +694,13 @@ Tools.getOpacity = (function opacity() {
 	};
 })();
 
-
 //Scale the canvas on load
 //Tools.board.width.baseVal.value = Tools.server_config.MAX_BOARD_SIZE;
 Tools.board.style.height= Tools.server_config.MAX_BOARD_SIZE_Y;
 Tools.svg.width.baseVal.value = Tools.server_config.MAX_BOARD_SIZE;
 Tools.svg.height.baseVal.value = Tools.server_config.MAX_BOARD_SIZE_Y;
+Tools.svg.style.marginLeft = Tools.server_config.MAX_BOARD_SIZE * 0.5 + "px";
+Tools.svg.style.marginTop = "100px";
 
 /**
  What does a "tool" object look like?

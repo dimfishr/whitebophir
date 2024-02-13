@@ -25,7 +25,7 @@
  */
 
 var Tools = {};
-console.log('Actual board')
+console.log('Actual board');
 
 Tools.i18n = (function i18n() {
 	var translations = JSON.parse(document.getElementById("translations").text);

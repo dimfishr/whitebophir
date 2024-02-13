@@ -25,6 +25,7 @@
  */
 
 var Tools = {};
+console.log('Actual board')
 
 Tools.i18n = (function i18n() {
 	var translations = JSON.parse(document.getElementById("translations").text);
@@ -44,6 +45,19 @@ var BOARD_Y_BASE = Tools.server_config.BOARD_Y_BASE;
 Tools.board = document.getElementById("board");
 Tools.svg = document.getElementById("canvas");
 Tools.drawingArea = Tools.svg.getElementById("drawingArea");
+
+const boardWrapper = document.querySelector('.board_wrapper')
+const htmlElement = document.querySelector('html')
+
+Tools.svg.style.margin = `${(boardWrapper.clientHeight - Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * 0.2)) / 2}px ${(boardWrapper.clientWidth - Math.round(Tools.server_config.MAX_BOARD_SIZE * 0.2)) / 2}px`
+
+window.addEventListener("resize", function() {
+	Tools.svg.style.margin = `${(boardWrapper.clientHeight - Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * 0.2)) / 2}px ${(boardWrapper.clientWidth - Math.round(Tools.server_config.MAX_BOARD_SIZE * 0.2)) / 2}px`
+});
+
+window.addEventListener('load', function() {
+	htmlElement.scrollTop = 0
+})
 
 //Initialization
 Tools.curTool = null;
@@ -472,7 +486,7 @@ function updateDocumentTitle() {
 })();
 
 function resizeCanvas(m) {
-	return;
+	// return;
 	//Enlarge the canvas whenever something is drawn near its border
 	var x = m.x | 0, y = m.y | 0
 	if (x > Tools.svg.width.baseVal.value - 2000) {
@@ -494,21 +508,34 @@ Tools.messageHooks = [resizeCanvas, updateUnreadCount];
 
 Tools.scale = 0.2;
 var scaleTimeout = null;
-Tools.setScale = function setScale(scale) {
-	var fullScale = Math.min(window.innerWidth/Tools.server_config.MAX_BOARD_SIZE, window.innerHeight / Tools.server_config.MAX_BOARD_SIZE_Y);
 
-	minScale = 0.2;
-	maxScale = 12;
+let xEnd, yEnd, xStart, yStart;
+
+Tools.board.onmousemove = function(e) {
+  xStart = e.offsetX;
+  yStart = e.offsetY;
+  // console.log(xStart, 'start');
+};
+
+Tools.board.onwheel = function(e) {
+  xEnd = e.offsetX;
+  yEnd = e.offsetY;
+  // console.log(xEnd, 'end');
+};
+
+Tools.setScale = function setScale(scale) {
+	var fullScale = Math.max(window.innerWidth, window.innerHeight) / Tools.server_config.MAX_BOARD_SIZE;
+	var minScale = 0.2;
+	var maxScale = 12;
 	if (isNaN(scale)) scale = 1;
 	scale = Math.max(minScale, Math.min(maxScale, scale));
-	Tools.board.style.willChange = 'transform';
-	Tools.board.style.transform = 'scale(' + scale + ')';
-	Tools.board.style.transformOrigin = '0 0';
+	Tools.svg.style.willChange = 'transform';
+	Tools.svg.style.transform = 'scale(' + scale + ')';
 	Tools.board.style.width = Math.round(Tools.server_config.MAX_BOARD_SIZE * scale).toString() + "px";
 	Tools.board.style.height = Math.round(Tools.server_config.MAX_BOARD_SIZE_Y * scale).toString() + "px";
 	clearTimeout(scaleTimeout);
 	scaleTimeout = setTimeout(function () {
-		Tools.board.style.willChange = 'auto';
+		Tools.svg.style.willChange = 'auto';
 	}, 1000);
 	Tools.scale = scale;
 	return scale;
@@ -697,8 +724,8 @@ Tools.getOpacity = (function opacity() {
 Tools.board.style.height= Tools.server_config.MAX_BOARD_SIZE_Y;
 Tools.svg.width.baseVal.value = Tools.server_config.MAX_BOARD_SIZE;
 Tools.svg.height.baseVal.value = Tools.server_config.MAX_BOARD_SIZE_Y;
-Tools.svg.style.marginLeft = Tools.server_config.MAX_BOARD_SIZE * 0.5 + "px";
-Tools.svg.style.marginTop = "100px";
+// Tools.svg.style.marginLeft = Tools.server_config.MAX_BOARD_SIZE * 0.5 + "px";
+// Tools.svg.style.marginTop = "100px";
 
 /**
  What does a "tool" object look like?

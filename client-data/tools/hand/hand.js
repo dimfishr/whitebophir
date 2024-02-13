@@ -450,11 +450,34 @@
 			}
 		}
 	}
+	const xPositions = [];
+	let lastXPosition = 0;
+	let currentXPosition = 0; 
+
+	const yPositions = [];
+	let lastYPosition = 0;
+	let currentYPosition = 0; 
+
+	window.addEventListener('mouseup', () => {
+		currentXPosition += lastXPosition;
+		currentYPosition += lastYPosition;
+	})
+
 	function moveHand(x, y, evt, isTouchEvent) {
 		if (selected && !isTouchEvent) { //Let the browser handle touch to scroll
-			window.scrollTo(selected.x - evt.clientX, selected.y - evt.clientY);
+			// window.scrollTo(selected.x - evt.clientX, selected.y - evt.clientY);
+
+			Tools.svg = document.getElementById("canvas");
+			Tools.svg.style.left = currentXPosition + (evt.clientX - selected.x); 
+			Tools.svg.style.top = currentYPosition + evt.clientY - selected.y; 
+
+			xPositions.push(evt.clientX - selected.x);
+			yPositions.push(evt.clientY - selected.y);
+
+			lastXPosition = xPositions.pop();
+			lastYPosition = yPositions.pop();
 		}
-	}
+	}																																	
 
 	function press(x, y, evt, isTouchEvent) {
 		if (!handTool.secondary.active) startHand(x, y, evt, isTouchEvent);

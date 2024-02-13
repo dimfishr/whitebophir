@@ -104,6 +104,10 @@ summary {
   display: block;
 }
 
+svg {
+  position: relative;
+}
+
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
@@ -1186,5 +1190,7 @@ body > iframe {
 
 .board_wrapper {
   position: relative;
+  width: 100%;
+  height: 100vh;
 }
 

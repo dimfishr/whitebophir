@@ -33,17 +33,23 @@
         y: 0.0,
         clientX: 0,
         clientY: 0,
-        scale: 1.0
+        scale: 1.0,
+        offsetX: 0,
+        offsetY: 0,
+        target: null
     };
     var moved = false, pressed = false;
 
     function zoom(origin, scale) {
+        if (origin.target === 'canvas') {
         var oldScale = origin.scale;
         var newScale = Tools.setScale(scale);
+            
         window.scrollTo(
-            origin.scrollX + origin.x * (newScale - oldScale),
-            origin.scrollY + origin.y * (newScale - oldScale)
-        );
+            origin.scrollX + origin.offsetX * (newScale - oldScale),
+            origin.scrollY + origin.offsetY * (newScale - oldScale)
+            );
+        }
     }
 
     var animation = null;
@@ -62,6 +68,11 @@
         origin.clientY = getClientY(evt, isTouchEvent);
         origin.clientX = getClientX(evt, isTouchEvent);
         origin.scale = Tools.getScale();
+        origin.offsetX = evt.offsetX;
+        origin.offsetY = evt.offsetY;
+
+        origin.target = evt.target.id;
+        // console.dir(evt);
     }
 
     function press(x, y, evt, isTouchEvent) {

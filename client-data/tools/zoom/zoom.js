@@ -41,7 +41,7 @@
     var moved = false, pressed = false;
 
     function zoom(origin, scale) {
-        if (origin.target === 'canvas') {
+        if (origin.target === 'canvas' || origin.target === 'gridContainer') {
         var oldScale = origin.scale;
         var newScale = Tools.setScale(scale);
             

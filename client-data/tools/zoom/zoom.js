@@ -36,12 +36,13 @@
         scale: 1.0,
         offsetX: 0,
         offsetY: 0,
-        target: null
+        target: null,
+        ownerTargetElement: null
     };
     var moved = false, pressed = false;
 
     function zoom(origin, scale) {
-        if (origin.target === 'canvas' || origin.target === 'gridContainer') {
+        if (origin.target === 'canvas' || origin.ownerTargetElement === 'canvas') {
         var oldScale = origin.scale;
         var newScale = Tools.setScale(scale);
             
@@ -72,6 +73,7 @@
         origin.offsetY = evt.offsetY;
 
         origin.target = evt.target.id;
+        origin.ownerTargetElement = evt?.target?.ownerSVGElement?.id;
         // console.dir(evt);
     }
 

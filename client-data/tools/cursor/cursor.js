@@ -43,7 +43,7 @@
         },
         "onSizeChange": onSizeChange,
         "draw": draw,
-        "mouseCursor": "crosshair",
+        "mouseCursor": "default",
         "icon": "tools/pencil/icon.svg",
     };
     Tools.register(cursorTool);

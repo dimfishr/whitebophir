@@ -32,6 +32,17 @@ ToolBar.init = function () {
     if(ToolBar.opacityIconElement === null) {
         console.error("Opacity icon element with id tool__opacity_icon not found. Color changing won't work");
     }
+
+    Tools.board = document.getElementById('board');
+    const boardUrl = new URL(Tools.board.baseURI);
+    const isEdit = boardUrl.searchParams.get('isEdit');
+
+    if (isEdit !== null) {
+      if (isEdit === 'false') {
+            ToolBar.setTool('Cursor');
+      }
+    }
+
     ToolBar.setTool(Tools.curTool === null ? 'Pencil' : Tools.curTool.name);
     ToolBar.setSize(Tools.getSize());
     ToolBar.setColor(Tools.getColor());

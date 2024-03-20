@@ -436,6 +436,11 @@ Tools.drawAndSend = function (data, tool) {
   Tools.send(data, tool.name);
 };
 
+Tools.draw = function (data, tool) {
+  if (tool == null) tool = Tools.curTool;
+  tool.draw(data, true);
+};
+
 //Object containing the messages that have been received before the corresponding tool
 //is loaded. keys : the name of the tool, values : array of messages for this tool
 Tools.pendingMessages = {};
@@ -764,7 +769,7 @@ Tools.setColor = function (color) {
 };
 
 Tools.getColor = (function color() {
-  var color_index = 0;
+  var color_index = 1;
   var initial_color = Tools.colorPresets[color_index].color;
   Tools.setColor(initial_color);
   return function () {

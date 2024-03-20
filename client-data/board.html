@@ -37,14 +37,16 @@
             <div class="tool__row">
                 <div class="tool__col">
                     <ul class="tool__list">
-                        <li class="tool__item" id="tool-Cursor" title="Курсор" onclick="ToolBar.setTool('Cursor')"><i class="cor_icon_tassel"></i></li>
+                        
                         <li class="tool__item" id="tool-Pencil" title="Карандаш (горячая клавиша: p) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Pencil')"><i class="cor_icon_tassel"></i></li>
-                        <li class="tool__item" id="tool-Straight line" title="Прямая линия (горячая клавиша: l) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Straight line')"><i class="cor_icon_tassel"></i></li>
+                        <li class="tool__item" id="tool-Straight line" title="Прямая линия (горячая клавиша: l) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Straight line')"><i class="cor_icon_pen-tool"></i></li>
                         <li class="tool__item" id="tool-Rectangle" title="Прямоугольник (горячая клавиша: r) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Rectangle')"><i class="cor_icon_rectangle"></i></li>
                         <li class="tool__item" id="tool-Ellipse" title="Эллипс (горячая клавиша: c) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Ellipse')"><i class="cor_icon_ellipse"></i></li>
                         <li class="tool__item" id="tool-Text" title="Текст (горячая клавиша: t)" onclick="ToolBar.setTool('Text')"><i class="cor_icon_text"></i></li>
                         <li class="tool__item" id="tool-Hand" title="Рука (горячая клавиша: h) [нажмите, чтобы переключиться]" onclick="ToolBar.setTool('Hand')"><i class="cor_icon_hand"></i></li>
                         <li class="tool__item" id="tool-Eraser" title="Ластик (горячая клавиша: e)" onclick="ToolBar.setTool('Eraser')"><i class="cor_icon_eraser"></i></li>
+                        <li class="tool__item" id="tool-Cursor" title="Курсор" onclick="ToolBar.setTool('Cursor')"><i class="cor_icon_pencil"></i></li>
+                        <li class="tool__item" id="tool-Ruler" title="Линейка" onclick="ToolBar.setTool('Ruler')"><i class="cor_icon_ruler"></i></li>
                     </ul>
                 </div>
                 <div class="tool__col">
@@ -120,7 +122,7 @@
                 <img class="tool-icon" width="60" height="60" src="icon-size.svg" alt="size"/>
                 <label class="tool-name slider" for="chooseSize">
                     <span>{{translations.size}}</span>
-                    <input type="range" id="chooseSize" value="4" min="1" max="50" step="1"
+                    <input type="range" id="chooseSize" value="20" min="1" max="50" step="1"
                            class="rangeChooser"/>
                 </label>
             </li>
@@ -155,6 +157,7 @@
     <script src="../tools/pencil/wbo_pencil_point.js"></script>
     <script src="../tools/pencil/pencil.js"></script>
     <script src="../tools/cursor/cursor.js"></script>
+    <script src="../tools/ruler/ruler.js"></script>
     <script src="../tools/line/line.js"></script>
     <script src="../tools/rect/rect.js"></script>
     <script src="../tools/ellipse/ellipse.js"></script>

@@ -44,7 +44,7 @@
         "onSizeChange": onSizeChange,
         "draw": draw,
         "mouseCursor": "default",
-        "icon": "tools/pencil/icon.svg",
+        "icon": "tools/cursor/cursor.svg",
     };
     Tools.register(cursorTool);
     Tools.addToolListeners(cursorTool);
@@ -55,7 +55,7 @@
         y: 0,
         color: Tools.getColor(),
         size: Tools.getSize(),
-        userName: Tools.userName
+        userName: Tools.userName,
     };
 
     function handleMarker(x, y) {

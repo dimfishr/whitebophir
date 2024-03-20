@@ -31,7 +31,6 @@
 	function continueLine(x, y, evt) {
 		/*Wait 70ms before adding any point to the currently drawing line.
 		This allows the animation to be smother*/
-		console.log('curLine', curLine)
 		if (curLine !== null) {
 			if (lineTool.secondary.active) {
 				var alpha = Math.atan2(y - curLine.y, x - curLine.x);
@@ -109,7 +108,7 @@
 		text.setAttribute("x", positionX);
 		text.setAttribute("y", positionY);
 		text.setAttribute("id", "text_" + lineData.id);
-		text.setAttribute("font-size", "12");
+		text.setAttribute("font-size", "24");
 		text.textContent = length.toFixed(2);
 		Tools.drawingArea.appendChild(text);
 		// Tools.drawingArea.appendChild(text);

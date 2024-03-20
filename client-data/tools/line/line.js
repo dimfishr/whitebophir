@@ -56,6 +56,7 @@
 	}
 
 	function continueLine(x, y, evt) {
+		console.log('curLine line', curLine )
 		/*Wait 70ms before adding any point to the currently drawing line.
 		This allows the animation to be smother*/
 		if (curLine !== null) {
